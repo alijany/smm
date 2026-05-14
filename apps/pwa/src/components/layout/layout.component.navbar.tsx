@@ -114,17 +114,6 @@ export function Navbar({ transparent }: { transparent?: boolean }) {
                       <IconPhone color="#FC4258" className="size-4" />
                     </Button>
                   </a>
-                  {/* <a href="https://instagram.com/hamava_charity" target="_blank" rel="noreferrer">
-                    <Button variant="outline" size="lg" className="p-2">
-                      <InstagramIcon name="send" size={20} />
-                    </Button>
-                  </a>
-                  <a href="https://www.linkedin.com/company/hamava-charity" target="_blank" rel="noreferrer">
-
-                    <Button variant="outline" size="lg" className="p-2">
-                      <Linkedin01Icon name="send" size={20} />
-                    </Button>
-                  </a> */}
                 </div>
               </div>
             </DialogPanel>

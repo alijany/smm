@@ -21,7 +21,7 @@ By participating in this project, you agree to abide by our Code of Conduct:
 - Be respectful and inclusive
 - Focus on constructive feedback
 - Help others learn and grow
-- Remember we're all working toward helping children with cancer
+- Remember we're all working toward building great software together
 
 ## Getting Started
 
@@ -38,8 +38,8 @@ By participating in this project, you agree to abide by our Code of Conduct:
 1. **Fork the repository**
    ```bash
    # Clone your fork
-   git clone https://github.com/YOUR_USERNAME/PROJECT_NAME.git
-   cd PROJECT_NAME
+   git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   cd YOUR_REPO_NAME
    ```
 
 2. **Install dependencies**
@@ -94,8 +94,8 @@ PostgreSQL and Redis are started for you; the backend service can connect direct
 #### Quick Start
 1. Clone (If using windows, use WSL for best compatibility):
    ```bash
-   git clone https://github.com/YOUR_USERNAME/PROJECT_NAME.git
-   cd PROJECT_NAME
+   git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   cd YOUR_REPO_NAME
    ```
 2. Copy env file in `.devcontainer` folder (do this BEFORE starting services):
    ```bash
@@ -474,7 +474,7 @@ We appreciate all contributors! Contributors will be:
 - Recognized in release notes for significant contributions
 - Invited to contribute to project roadmap discussions
 
-Thank you for helping us support children with cancer through technology! 🎗️
+Thank you for contributing!
 
 ---
 

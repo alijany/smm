@@ -1,228 +1,141 @@
 # Core API
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-The Core API is the backend service for the platform, built with NestJS framework. It provides RESTful APIs for donation management, user authentication, payment processing, and notification services.
+NestJS backend service providing RESTful APIs for authentication, user management, notifications, and file storage.
 
 ## Architecture Overview
 
-This API follows a modular architecture with each feature isolated in its own module. The design enables easy scaling and potential migration to microservices in the future.
+Modular NestJS architecture — each feature is an isolated module, designed to make future migration to microservices straightforward.
 
 ### Key Features
 
-- **Authentication & Authorization**: JWT-based auth with role-based access control
-- **Donation Management**: Campaign creation, tracking, and reporting
-- **Payment Integration**: Secure payment processing with Jibit gateway
+- **Authentication & Authorization**: JWT-based auth with OTP verification and role-based access control
+- **User Management**: User profiles, account verification, role assignments
 - **Notification System**: Multi-channel notifications (SMS, Email, Push)
-- **User Management**: Comprehensive user profiles and account management
-- **Digital Wallet**: Transaction tracking and donation history
-- **File Storage**: AWS S3 integration for documents and media
-- **URL Shortening**: Campaign link management
+- **File Storage**: S3-compatible storage with presigned URL support
+- **Background Jobs**: Redis + BullMQ for async job processing
 
 ## Technology Stack
 
 - **Framework**: NestJS with TypeScript
 - **Database**: PostgreSQL with MikroORM
-- **Cache/Queue**: Redis with Bull Queue
+- **Cache/Queue**: Redis + BullMQ
 - **Authentication**: Passport.js with JWT
-- **File Storage**: AWS S3
-- **Payment**: Jibit Payment Gateway
+- **File Storage**: AWS S3 SDK (MinIO for dev)
 - **Testing**: Jest, Playwright
 
 ## Module Structure
 
-### Core-API Module Structure
+Each module follows this layout:
 
-Each module in the core-api follows NestJS conventions and includes:
-- **`[module].controller.ts`**: Handles HTTP requests and API endpoints
-- **`[module].service.ts`**: Contains business logic and data processing
-- **`[module].entity.ts`**: Database entity definitions using MikroORM
-- **`[module].module.ts`**: Module definition and dependency injection
-- **`dtos/`**: Data Transfer Objects for request/response validation
-- **Custom folders**: Additional folders like `providers/`, `strategies/`, `channels/`, etc., based on specific module requirements (e.g., authentication strategies, notification channels)
+```
+src/<feature>/
+  <feature>.module.ts      NestJS module and DI wiring
+  <feature>.controller.ts  HTTP request handlers
+  <feature>.service.ts     business logic
+  <feature>.entity.ts      MikroORM entity definition
+  dtos/                    request/response validation DTOs
+  # Optional sub-folders based on module needs:
+  providers/               custom providers
+  strategies/              Passport strategies
+  guards/                  auth/role guards
+  channels/                notification delivery channels
+```
 
 ### Core Modules
 
-- **`auth/`**: Authentication and authorization
-  - OTP-based phone number authentication
-  - JWT token management
-  - Role-based access control
-  - [Read more](src/auth/README.md)
+- **`auth/`**: OTP-based authentication, JWT token management, role-based access control — [details](src/auth/README.md)
+- **`user/`**: User registration, profile management, account verification
+- **`notification/`**: Multi-channel notifications (SMS, Email, Push) — [details](src/notification/README.md)
+- **`storage/`**: S3-compatible file storage with presigned URLs
+- **`roles/`**: Role definitions and permission management
+- **`sms/`**: SMS provider integration
 
-- **`donation/`**: Donation management
-  - Responsibilities: creating and managing donation campaigns, handling donation claims, currency/exchange flows, retrying failed donations, and exposing donation-related endpoints.
-  - See `src/donation/README.md` for implementation details and examples.
+### Shared Libraries (`src/libs/`)
 
-- **`payment/`**: Payment processing
-  - Jibit payment gateway integration
-  - Transaction security and validation
-  - Payment status tracking and webhooks
-  - [Read more](src/payment/README.md)
+Always use these — don't reimplement:
 
-- **`notification/`**: Multi-channel notifications
-  - SMS notifications via third-party providers
-  - Email notification templates
-  - Push notification support
-  - Notification channels and preferences
-  - [Read more](src/notification/README.md)
-
-- **`user/`**: User management
-  - User registration and profile management
-  - Account verification and validation
-  - User preferences and settings
-
-- **`wallet/`**: Digital wallet functionality
-  - Responsibilities: managing user wallets, recording wallet transactions, processing withdrawal requests, and exposing wallet-related endpoints.
-  - Features: transaction history, donation tracking, balance management, withdrawal request lifecycle (create/approve/reject), and API endpoints for client integrations.
-
-### Supporting Modules
-
-- **`storage/`**: File storage management (S3 integration)
-- **`shortlink/`**: URL shortening for campaign links  
-- **`sms/`**: SMS service integration
-- **`roles/`**: Role-based permission management
-- **`transaction/`**: Financial transaction tracking
-- **`events/`**: Event-driven system notifications
-- **`contact-message/`**: Contact form handling
-
-### Shared Libraries (`libs/`)
-
-The core-api includes a `libs/` directory that contains shared code and utilities used across multiple modules:
-
-These shared libraries provide:
-- **ORM Utilities**: Common database operations, base entities, and migration tools using MikroORM
-- **Date Utilities**: Date formatting and manipulation functions
-- **Duration Utilities**: Duration parsing and calculation utilities
-- **General Utils**: Common utility functions like number normalization pipes
+- `orm/orm.entity.base.ts` — base entity with common fields (id, createdAt, updatedAt, soft-delete)
+- `orm/orm.provider.base.ts` — DI providers for MikroORM entity managers
+- `orm/orm.repository.service.base.ts` — reusable CRUD and transaction helpers
+- `orm/orm.service.migration.ts` — migration generation and execution
+- `orm/orm.types.factory.ts` — shared DB/TypeScript type helpers
 
 ## Environment Variables
 
-Create a `.env` file in the root directory based on the `.env.example` template.
+Copy `apps/core-api/.env.example` → `apps/core-api/.env`.
 
-## Tooling and commands
-
-- Use Node 20+ with pnpm via corepack; install deps with `pnpm install` (do not cancel).
-- Build and lint: `pnpm --filter core-api build`, `pnpm --filter core-api lint`.
-- Tests: `pnpm --filter core-api test` and `test:e2e` are currently unstable; prefer lint/build plus manual checks.
-
-## Running the app
+## Commands
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode (recommended for development)
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+pnpm --filter core-api start:dev     # dev server with watch mode
+pnpm --filter core-api build         # compile to dist/
+pnpm --filter core-api lint          # ESLint check
+pnpm --filter core-api migration:create  # generate MikroORM migration
+pnpm --filter core-api migration:up      # run pending migrations
 ```
+
+Tests are currently unstable — use `lint` + `build` as the verification loop.
+
+## API
+
+- **Base URL**: `http://localhost:4000/api/v1`
+- **Authentication**: `Authorization: Bearer <jwt-token>`
+- **Content-Type**: `application/json`
 
 ## Database Operations
 
-The project centralizes database helpers in `src/libs/orm/`. These are small, composable building blocks used across modules:
-
-- `orm.entity.base.ts` — base entity classes and shared entity-level helpers (common fields, soft-delete/timestamps, helpers).
-- `orm.provider.base.ts` — dependency-injection providers that expose MikroORM connections/entity managers to services.
-- `orm.service.base.ts` — a reusable ORM service with common CRUD and transaction helpers used by repositories/services.
-- `orm.service.migration.ts` — migration-focused service for generating and running migrations programmatically.
-- `orm.types.factory.ts` — factory helpers for mapping and reusing DB/TypeScript types across entities and migrations.
-
-Usage note: extend the base entity types in your entities and import the provided ORM services/providers in module files. For migrations, use the migration service in `src/libs/orm/` or the repository's migration scripts (see `package.json`) to generate and run migrations.
-
-
-## Testing
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-
-# watch mode for development
-$ pnpm run test:watch
-```
-
-## API Documentation
-
-The API follows RESTful conventions with the following base structure:
-
-- **Base URL**: `http://localhost:4000/api/v1`
-- **Authentication**: Bearer Token (JWT)
-- **Content-Type**: `application/json`
-
-## Development Guidelines
-
-### File Naming Conventions
-
-#### General Guidelines
-
-- Use lowercase letters for file and directory names.
-- Use dots (`.`) to separate words in file names.
-- Use descriptive and meaningful names that reflect the purpose of the file or directory.
-
-#### File Extensions
-
-- Use the `.spec.ts` or `.test.ts` extension for test files.
-- Use the `.d.ts` extension for TypeScript declaration files.
-- Use the `.config.ts` or `.config.js` extension for configuration files.
-- Use the `.interface.ts` extension for interface files.
-- Use the `.type.ts` extension for type definition files.
-- Use the `.dto.ts` extension for Data Transfer Object files.
-- Use the `.entity.ts` extension for entity files representing database models.
-- Use the `.controller.ts`, `.service.ts`, `.middleware.ts`, and `.repository.ts` extensions for respective architectural components.
-
-#### Prefixes
-
-- Use prefixes to group related files and indicate their purpose or scope.
-- Use the `[feature].` prefix for files related to specific features or modules within the project.
-
-#### Index Files
-
-- Use `index.ts` as the entry point file for a directory or module.
-
-### Code Organization
-
-- Each module should be self-contained
-- Use DTOs for request/response validation
-- Implement proper error handling with custom exceptions
-- Follow dependency injection patterns
-- Use guards for authentication and authorization
-
-### Error Handling
-
-#### Exception Hierarchy
-
-- **Custom Exceptions**: Create a hierarchy of custom exceptions for application-specific errors.
-- **Base Exception**: Extend a base `HttpException` class to maintain consistency.
-
-#### Throwing Standard Exceptions
-
-- Use built-in `HttpException` class for common HTTP errors.
-- Include appropriate `statusCode` and `message` properties.
-
-#### Custom Exceptions Example
+Extend the base classes from `src/libs/orm/` in your entities and services. For schema changes always generate a migration — do not modify the schema directly.
 
 ```typescript
-// src/errors/forbidden.exception.ts
-export class ForbiddenException extends HttpException {
-  constructor(message = 'Forbidden') {
-    super(message, HttpStatus.FORBIDDEN);
+// Extend base entity
+import { BaseEntity } from '@/libs/orm/orm.entity.base';
+
+@Entity()
+export class Item extends BaseEntity {
+  @Property()
+  name: string;
+}
+```
+
+## File Naming Conventions
+
+- Lowercase with dots as separators
+- `<feature>.<role>.ts` pattern: `user.service.ts`, `user.entity.ts`, `user.controller.ts`
+- Test files: `<feature>.spec.ts` or `<feature>.test.ts`
+- DTOs: `create-item.dto.ts`, `update-item.dto.ts`
+- Interfaces: `jwt-payload.interface.ts`
+- Types: `notification-channel.type.ts`
+- Index files: `index.ts` as module entry point
+
+## Error Handling
+
+Extend `HttpException` for custom application errors:
+
+```typescript
+import { HttpException, HttpStatus } from '@nestjs/common';
+
+export class ItemNotFoundException extends HttpException {
+  constructor(id: string) {
+    super(`Item ${id} not found`, HttpStatus.NOT_FOUND);
   }
 }
 ```
 
-#### Exception Filters
+Use NestJS built-in exceptions (`BadRequestException`, `UnauthorizedException`, etc.) for standard HTTP errors. Implement global exception filters to standardize error response shapes.
 
-- Implement global exception filters to handle unhandled exceptions.
-- Customize responses and logging as needed.
+## Adding a New Module
 
-## Contributing
+1. Create `src/<feature>/` with the standard files
+2. Define entity extending `BaseEntity` from `src/libs/orm/orm.entity.base.ts`
+3. Create DTOs with `class-validator` decorators
+4. Implement service injecting `EntityManager` or extending the base repository service
+5. Register the module in `src/app.module.ts`
+6. Generate a migration: `pnpm --filter core-api migration:create`
 
-Please read the main [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines on contributing to this project.
+## Code Organization
+
+- Each module is self-contained — import only from `src/libs/` or other modules' exported services
+- Use DTOs for all request/response boundaries
+- Use guards for authentication (`JwtAuthGuard`) and authorization (`RolesGuard`)
+- Use `@Public()` decorator on endpoints that skip JWT auth
+- Use `@CurrentUser()` decorator to access the authenticated user in controllers
