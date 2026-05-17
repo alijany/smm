@@ -10,7 +10,6 @@ Update `"name"` in root `package.json` to match
 cp .env.example .env
 cp apps/core-api/.env.example apps/core-api/.env
 cp apps/pwa/.env.example apps/pwa/.env.local
-cp .devcontainer/.env.example .devcontainer/.env
 ```
 
 Edit each `.env` file with your actual values (DB password, JWT secrets, S3 keys, etc.).
@@ -19,10 +18,9 @@ Edit each `.env` file with your actual values (DB password, JWT secrets, S3 keys
 
 ### Option A — Dev Container (recommended)
 
-1. Complete step 3 first (copy `.devcontainer/.env` before opening the container)
-2. Open the project in VS Code
-3. When prompted, click **Reopen in Container** (or use Command Palette → `Dev Containers: Reopen in Container`)
-4. PostgreSQL and Redis start automatically inside the container
+1. Open the project in VS Code
+2. When prompted, click **Reopen in Container** (or use Command Palette → `Dev Containers: Reopen in Container`)
+3. PostgreSQL and Redis start automatically inside the container
 
 ```bash
 pnpm --filter core-api start:dev   # backend on :4000
