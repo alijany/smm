@@ -97,18 +97,12 @@ PostgreSQL and Redis are started for you; the backend service can connect direct
    git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
    cd YOUR_REPO_NAME
    ```
-2. Copy env file in `.devcontainer` folder (do this BEFORE starting services):
-   ```bash
-   cd .devcontainer
-   cp .env.example .env
-   # adjust values as needed
-   ```
-3. Open folder in VS Code. When prompted, click "Reopen in Container" (or use Command Palette → `Dev Containers: Reopen in Container`).
-4. Install workspace dependencies (usually auto-run, run manually if needed):
+2. Open folder in VS Code. When prompted, click "Reopen in Container" (or use Command Palette → `Dev Containers: Reopen in Container`).
+3. Install workspace dependencies (usually auto-run, run manually if needed):
    ```bash
    pnpm install
    ```
-5. Set up environment files for each service:
+4. Set up environment files for each service:
    ```bash
    # Set up backend environment
    cp apps/core-api/.env.example apps/core-api/.env
@@ -116,15 +110,15 @@ PostgreSQL and Redis are started for you; the backend service can connect direct
    # Set up frontend environment  
    cp apps/pwa/.env.example apps/pwa/.env.local
    ```
-6. Start backend (core API):
+5. Start backend (core API):
    ```bash
    pnpm --filter core-api start:dev
    ```
-7. Start frontend (in a second terminal):
+6. Start frontend (in a second terminal):
    ```bash
    pnpm --filter pwa dev
    ```
-8. Open the printed URLs in your browser.
+7. Open the printed URLs in your browser.
 
 #### Services & Ports (Defaults)
 - PostgreSQL: 5432 (forward if you want external client access)

@@ -36,10 +36,9 @@ Tests (`pnpm test`, `pnpm test:e2e`) are currently unstable. Use `lint` + `build
 
 ### Dev Container (recommended)
 
-1. Copy `.devcontainer/.env.example` → `.devcontainer/.env` and adjust values
-2. Open the project in VS Code → "Reopen in Container"
-3. PostgreSQL (5432) and Redis (6379) start automatically inside the container
-4. Run `pnpm install`, then start the backend and frontend as above
+1. Open the project in VS Code → "Reopen in Container"
+2. PostgreSQL (5432) and Redis (6379) start automatically inside the container
+3. Run `pnpm install`, then start the backend and frontend as above
 
 ### Manual (local)
 
