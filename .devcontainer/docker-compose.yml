@@ -5,14 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
     volumes:
       - ../..:/workspaces:cached
       - /var/run/docker.sock:/var/run/docker.sock
-
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
-
     # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
     network_mode: service:db
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
@@ -46,6 +43,4 @@ services:
 
 volumes:
   postgres-data:
-  metabase-data:
-  browser-data:
   minio-data:
