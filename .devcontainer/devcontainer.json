@@ -35,7 +35,8 @@
 				"YoavBls.pretty-ts-errors",
 				"bradlc.vscode-tailwindcss",
 				"ms-azuretools.vscode-docker",
-				"dbaeumer.vscode-eslint"
+				"dbaeumer.vscode-eslint",
+				"Anthropic.claude-code"
 			]
 		}
 	},
