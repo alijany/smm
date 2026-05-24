@@ -14,7 +14,7 @@ scripts/
   setup/          interactive server provisioning wizard (Docker, Traefik, Redis, MinIO, Drone)
 .devcontainer/    VS Code Dev Container config (preferred dev environment)
 .drone.yml        CI/CD pipeline — triggers on prd branch push
-docker-compose.yml production service definitions (api, pwa, db)
+docker-compose.yml production service definitions (api, pwa, postgis)
 .env.example      root env template — copy to .env
 ```
 
@@ -43,7 +43,7 @@ Tests (`pnpm test`, `pnpm test:e2e`) are currently unstable. Use `lint` + `build
 ### Manual (local)
 
 1. Copy env files (see Environment Variables below)
-2. Start PostgreSQL and Redis locally or via `docker compose up db redis`
+2. Start PostgreSQL and Redis locally or via `docker compose up postgis redis`
 3. Run backend and frontend dev servers
 
 ## Environment Variables
@@ -97,6 +97,26 @@ File naming convention: `domain.type.purpose.ext`
 - `items.types.ts`, `items.api.ts`, `items.component.list.tsx`
 
 Move code to `src/libs/` or `src/components/` **only** when used across 2+ domains. Auth is global by design.
+
+**Shared layouts** (`src/components/`):
+
+- `layout/` — public-facing pages: `RootLayout` wraps content with a sticky glassmorphism `Navbar` (transparent variant available) and a `Footer`. The navbar shows a "start free" CTA for guests and a "dashboard" link for authenticated users.
+- `dashboard/` — authenticated area: `DashboardLayout` provides a top `Navbar`, a collapsible `Sidebar` (desktop only), and a `BottomNavBar` (mobile only). Navigation items in `dashboard.constants.route-groups.tsx` are filtered at render time by the user's active role. Add new dashboard routes there.
+
+**User roles** (`src/components/auth/auth.constants.roles.ts`):
+
+Roles follow a strict hierarchy (higher = more access):
+
+| Role | Level | Notes |
+|---|---|---|
+| `admin` | 5 | Full access; sees the Users management route |
+| `owner` | 4 | Organization owner |
+| `manager` | 3 | |
+| `member` | 2 | |
+| `user` | 1 | |
+| `guest` | 0 | Lowest privilege |
+
+A user may hold multiple roles (one per organization). The active role is selected via a dropdown in the sidebar; route visibility and guards are evaluated against `selectedRole`. Use useAuth and `hasPermission(userRole, requiredRole)` for imperative checks and pass a `roles` array to `RouteItem` to restrict sidebar links.
 
 **API layer** (`src/libs/api/`):
 - `api.util.fetcher.ts` — `fetcher`, `postFetcher`, `patchFetcher`, `putFetcher`, `deleteFetcher`, `formDataFetcher`
