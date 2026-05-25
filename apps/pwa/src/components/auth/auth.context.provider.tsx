@@ -4,7 +4,6 @@ import { ApiError } from '@/libs/api/api.types.error';
 import { usePathname, useRouter } from 'next/navigation';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { AuthResponse, useProfile, useRequestOtpMutation, useVerifyOtpMutation } from './auth.api.client';
-import { WelcomeModal } from './auth.component.welcome-modal';
 import { InvitationStatus, Role, RoleType } from './auth.constants.roles';
 import { logout as logoutUtil, storeAuthTokens } from './auth.utils.tokens';
 
@@ -32,7 +31,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [error, setError] = useState<string | null>(null);
     const [profileChecked, setProfileChecked] = useState(false);
     const [selectedRole, setSelectedRole] = useState<RoleType | null>(null);
-    const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
     const { requestOtp: requestOtpMutation, isLoading: isOtpLoading } = useRequestOtpMutation();
     const { verifyOtp: verifyOtpMutation, isLoading: isVerifyLoading } = useVerifyOtpMutation();
@@ -122,11 +120,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             if (response) {
                 storeAuthTokens(response);
                 mutate();
-
-                // Show welcome modal for new users
-                if (response.isNewUser) {
-                    setShowWelcomeModal(true);
-                }
             }
         } catch (error: unknown) {
             setError((error as ApiError).message || 'Invalid OTP');
@@ -182,10 +175,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return (
         <AuthContext.Provider value={contextValue}>
             {children}
-            <WelcomeModal
-                isOpen={showWelcomeModal}
-                onClose={() => setShowWelcomeModal(false)}
-            />
         </AuthContext.Provider>
     );
 };
