@@ -104,7 +104,7 @@ function HeroSection() {
               <ShieldIco size={18} style={{ color: "var(--rose-500)" }} />
               <div style={{ fontSize: 12, fontWeight: 700, color: "var(--slate-700)" }}>عضو جامعه حسابداران رسمی</div>
             </div>
-            <div className="hero-float" style={{ position: "absolute", zIndex: 3, top: 132, left: -16, background: "#fff", borderRadius: 16, padding: "12px 16px", boxShadow: "0 14px 30px -8px rgba(31,42,68,0.15)", border: "1px solid var(--slate-100)", display: "flex", alignItems: "center", gap: 12 }}>
+            <div className="hero-float" style={{ position: "absolute", zIndex: 3, top: 100, left: -16, background: "#fff", borderRadius: 16, padding: "12px 16px", boxShadow: "0 14px 30px -8px rgba(31,42,68,0.15)", border: "1px solid var(--slate-100)", display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ display: "flex", flexDirection: "row-reverse" }}>
                 {["م", "ر", "ف", "ز"].map((c, i) => (
                   <div key={i} style={{ width: 28, height: 28, borderRadius: 9999, background: ["#FFCAD2", "#FFA7B4", "#FF7185", "#FC4258"][i], color: "#fff", border: "2px solid #fff", fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", marginLeft: i === 0 ? 0 : -8 }}>{c}</div>
@@ -486,7 +486,7 @@ function FaqSection() {
 /* ─── PAGE ──────────────────────────────────────────── */
 export default function HomePage() {
   return (
-    <RootLayout navbarTransparent={false}>
+    <RootLayout navbarTransparent={false} heroBg>
       <div style={{ overflowX: "hidden" }}>
         <HeroSection />
         <div className="page-lift">
