@@ -9,7 +9,7 @@ interface RootLayoutProps {
 
 export function RootLayout({ children, navbarTransparent, heroBg }: RootLayoutProps) {
   return (
-    <div className="overflow-x-hidden">
+    <div>
       <div
         className={
           heroBg
