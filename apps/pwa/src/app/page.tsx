@@ -61,7 +61,7 @@ function RoseButton({ href, children, size = "md", outline = false }: { href: st
 /* ─── HERO ──────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section id="hero" style={{ paddingTop: 56, paddingBottom: 24 }}>
+    <section id="hero" style={{ paddingTop: 56, paddingBottom: 56 }}>
       <div className="container-page">
         <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1.05fr) minmax(0,1fr)", gap: 48, alignItems: "center" }}>
           <div>
