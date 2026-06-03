@@ -362,8 +362,9 @@ function BlogPreviewSection() {
               <div className="design-card" style={{ padding: 0, borderRadius: 24, overflow: "hidden", height: "100%", display: "flex", flexDirection: "column", transition: "transform .2s, box-shadow .2s", cursor: "pointer" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 20px 50px -20px rgba(31,42,68,0.18)"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 32px rgba(0,0,0,0.02)"; }}>
-                <div style={{ background: "linear-gradient(135deg,#FFF1F3 0%,#FFE3E7 100%)", height: 140, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--rose-400)" }}>
-                  <BookIco size={40} />
+                <div style={{ height: 180, overflow: "hidden", background: "var(--slate-100)" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`https://picsum.photos/seed/blog${i + 1}/600/360`} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 </div>
                 <div style={{ padding: "22px 24px", display: "flex", flexDirection: "column", flex: 1, gap: 12 }}>
                   <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
