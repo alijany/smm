@@ -68,7 +68,7 @@ function HeroSection() {
             <EyebrowPill icon={SparkleIco}>۱۸ سال در کنار کسب‌وکارهای ایرانی</EyebrowPill>
             <h1 className="split-h1" style={{ marginTop: 20 }}>
               <span className="setup">امور مالی شرکت‌تان را</span>
-              <span className="accent">با خیال راحت به ما بسپارید.</span>
+              <span className="accent" style={{ fontSize: "clamp(24px, 3.2vw, 46px)" }}>با خیال راحت به ما بسپارید.</span>
             </h1>
             <p style={{ marginTop: 22, fontSize: 17, lineHeight: 1.85, color: "var(--slate-600)", maxWidth: 540 }}>
               از <strong style={{ color: "var(--slate-700)" }}>ثبت اسناد</strong> و <strong style={{ color: "var(--slate-700)" }}>اظهارنامه مالیاتی</strong> تا <strong style={{ color: "var(--slate-700)" }}>دفاع در هیات حل اختلاف</strong> و <strong style={{ color: "var(--slate-700)" }}>امور بیمه</strong>؛ یک تیم رسمی، یک قرارداد، صفر دغدغه.
