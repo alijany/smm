@@ -2,12 +2,15 @@
 
 import { RoleProtectedRoute } from '@/components/auth/auth.component.role-protected-route';
 import { RouteItems } from '@/components/dashboard/dashboard.constants.route-groups';
+import { DashbaordLayout } from '@/components/dashboard/dashboard.layout';
 
 
 export default function DashboardPage() {
   return (
     <RoleProtectedRoute allowedRoles={RouteItems.dashboard.roles}>
-      <div />
+      <DashbaordLayout>
+        <div />
+      </DashbaordLayout>
     </RoleProtectedRoute>
   );
 }
