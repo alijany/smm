@@ -1,8 +1,8 @@
 import { Type } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, Min } from 'class-validator';
-import { BlogPostStatus, BlogPostType } from '../blog-post.entity';
+import { LeadStatus } from '../lead.entity';
 
-export class PostsFilterDto {
+export class LeadFilterDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
@@ -16,15 +16,6 @@ export class PostsFilterDto {
   limit?: number = 10;
 
   @IsOptional()
-  @IsEnum(BlogPostStatus)
-  status?: BlogPostStatus;
-
-  @IsOptional()
-  @Type(() => Number)
-  @IsNumber()
-  categoryId?: number;
-
-  @IsOptional()
-  @IsEnum(BlogPostType)
-  type?: BlogPostType;
+  @IsEnum(LeadStatus)
+  status?: LeadStatus;
 }

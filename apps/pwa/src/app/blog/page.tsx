@@ -7,12 +7,12 @@ import { BlogPost, GetBlogPostsResponse } from '../dashboard/blog/blog.types';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'وبلاگ',
+  title: 'مقالات',
   description: 'آخرین مطالب و مقالات',
   alternates: { canonical: '/blog' },
   openGraph: {
     type: 'website',
-    title: 'وبلاگ',
+    title: 'مقالات',
     description: 'آخرین مطالب و مقالات',
   },
 };
@@ -148,7 +148,7 @@ export default async function BlogListPage() {
   if (posts.length === 0) {
     return (
       <div className="max-w-5xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold mb-4">وبلاگ</h1>
+        <h1 className="text-3xl font-bold mb-4">مقالات</h1>
         <p className="text-slate-400 text-lg">هنوز مطلبی منتشر نشده است.</p>
       </div>
     );
@@ -160,7 +160,7 @@ export default async function BlogListPage() {
     <main className="max-w-5xl mx-auto px-4 py-12" dir="rtl">
       {/* Page header */}
       <div className="mb-10">
-        <h1 className="text-4xl font-bold text-slate-900 mb-2">وبلاگ</h1>
+        <h1 className="text-4xl font-bold text-slate-900 mb-2">مقالات</h1>
         <p className="text-slate-500">آخرین مطالب و مقالات</p>
       </div>
 

@@ -8,11 +8,12 @@ interface MenuItemsProps {
 }
 
 const navLinks = [
-  { href: '/#services',  label: 'خدمات' },
-  { href: '/#why',       label: 'چرا ما' },
+  { href: '/#services',   label: 'خدمات' },
+  { href: '/#education',  label: 'آموزش' },
+  { href: '/#why',        label: 'چرا ما' },
   { href: '/#team',      label: 'تیم متخصصان' },
   { href: '/#trust',     label: 'مشتریان' },
-  { href: '/blog',       label: 'وبلاگ' },
+  { href: '/blog',       label: 'مقالات' },
   { href: '/#faq',       label: 'سوالات' },
 ];
 
