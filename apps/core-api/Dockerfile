@@ -38,4 +38,4 @@ COPY --chown=node:node --from=builder /app/apps/core-api/dist ./
 
 USER node
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["node", "main.js"]
+CMD ["node", "src/main.js"]
