@@ -95,8 +95,8 @@ function HeroSection() {
             </div>
           </div>
           <div style={{ position: "relative", minHeight: 460 }}>
-            <div style={{ position: "absolute", inset: "20px 0 0 -20px", background: "radial-gradient(60% 60% at 30% 40%, rgba(252,66,88,0.22) 0%, rgba(252,66,88,0) 70%)", filter: "blur(20px)", zIndex: 0 }} />
-            <div aria-hidden="true" style={{ position: "absolute", bottom: -16, left: -16, width: 120, height: 120, backgroundImage: "radial-gradient(rgba(252,66,88,0.45) 1.5px, transparent 1.5px)", backgroundSize: "12px 12px", opacity: 0.7, borderRadius: 16, zIndex: 0 }} />
+            <div style={{ position: "absolute", inset: "20px 0 0 -20px", background: "radial-gradient(60% 60% at 30% 40%, color-mix(in srgb, var(--rose-500) 22%, transparent) 0%, transparent 70%)", filter: "blur(20px)", zIndex: 0 }} />
+            <div aria-hidden="true" style={{ position: "absolute", bottom: -16, left: -16, width: 120, height: 120, backgroundImage: "radial-gradient(color-mix(in srgb, var(--rose-500) 45%, transparent) 1.5px, transparent 1.5px)", backgroundSize: "12px 12px", opacity: 0.7, borderRadius: 16, zIndex: 0 }} />
             <div style={{ position: "relative", zIndex: 2, borderRadius: 28, overflow: "hidden", border: "6px solid #fff", boxShadow: "0 30px 80px -20px rgba(31,42,68,0.30), 0 8px 24px -8px rgba(31,42,68,0.15)", background: "var(--slate-100)", aspectRatio: "5/6", maxWidth: 460, margin: "0 auto" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80&auto=format&fit=crop" alt="تیم شاخص محاسبان مهر در حال جلسه با مشتری" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { (e.target as HTMLImageElement).style.display = "none"; }} />
@@ -116,7 +116,7 @@ function HeroSection() {
             <div className="hero-float" style={{ position: "absolute", zIndex: 3, top: 100, left: -16, background: "#fff", borderRadius: 16, padding: "12px 16px", boxShadow: "0 14px 30px -8px rgba(31,42,68,0.15)", border: "1px solid var(--slate-100)", display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ display: "flex", flexDirection: "row-reverse" }}>
                 {["م", "ر", "ف", "ز"].map((c, i) => (
-                  <div key={i} style={{ width: 28, height: 28, borderRadius: 9999, background: ["#FFCAD2", "#FFA7B4", "#FF7185", "#FC4258"][i], color: "#fff", border: "2px solid #fff", fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", marginLeft: i === 0 ? 0 : -8 }}>{c}</div>
+                  <div key={i} style={{ width: 28, height: 28, borderRadius: 9999, background: ["var(--rose-200)", "var(--rose-300)", "var(--rose-400)", "var(--rose-500)"][i], color: "#fff", border: "2px solid #fff", fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", marginLeft: i === 0 ? 0 : -8 }}>{c}</div>
                 ))}
               </div>
               <div style={{ lineHeight: 1.15 }}>
@@ -180,11 +180,11 @@ function ServicesSection() {
           {servicesList.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="design-card" style={{ padding: "32px 32px 28px", borderRadius: 28, position: "relative", overflow: "hidden", background: s.highlight ? "linear-gradient(165deg,#fff 0%,#FFF1F3 100%)" : "#fff", borderColor: s.highlight ? "var(--rose-200)" : "var(--slate-200)", transition: "transform .2s, box-shadow .2s" }}
+              <div key={i} className="design-card" style={{ padding: "32px 32px 28px", borderRadius: 28, position: "relative", overflow: "hidden", background: s.highlight ? "linear-gradient(165deg,#fff 0%,var(--rose-50) 100%)" : "#fff", borderColor: s.highlight ? "var(--rose-200)" : "var(--slate-200)", transition: "transform .2s, box-shadow .2s" }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 20px 50px -20px rgba(31,42,68,0.18)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 0 32px rgba(0,0,0,0.02)"; }}>
                 <div style={{ display: "flex", gap: 16, alignItems: "flex-start", marginBottom: 20 }}>
-                  <div style={{ width: 56, height: 56, borderRadius: 16, background: "var(--rose-500)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 8px 20px -6px rgba(252,66,88,0.45)" }}><Icon size={26} /></div>
+                  <div style={{ width: 56, height: 56, borderRadius: 16, background: "var(--rose-500)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 8px 20px -6px color-mix(in srgb, var(--rose-500) 45%, transparent)" }}><Icon size={26} /></div>
                   <div>
                     <h3 style={{ margin: 0, fontSize: 22, fontWeight: 800, color: "var(--slate-800)", lineHeight: 1.2 }}>{s.title}</h3>
                     <p style={{ margin: "6px 0 0", fontSize: 14, color: "var(--slate-500)", fontWeight: 500 }}>{s.sub}</p>
@@ -209,10 +209,10 @@ function ServicesSection() {
 
 /* ─── EDUCATION ─────────────────────────────────────── */
 const educationCourses = [
-  { icon: CoinIco, title: "حسابداری", sub: "از مبانی تا حرفه‌ای", bullets: ["اصول و مبانی حسابداری مالی", "ثبت اسناد و دفاتر قانونی", "تهیه صورت‌های مالی", "حسابداری پیشرفته شرکت‌ها"], color: "#FC4258" },
-  { icon: TaxIco, title: "آموزش مالیاتی", sub: "تسلط بر قوانین مالیاتی", bullets: ["قانون مالیات مستقیم و ارزش‌افزوده", "تنظیم اظهارنامه‌های مالیاتی", "رویه‌های اعتراض و دفاع مالیاتی", "بهینه‌سازی قانونی مالیات"], color: "#E0394D" },
-  { icon: SoftwareIco, title: "آموزش نرم‌افزار", sub: "کار با نرم‌افزارهای تخصصی", bullets: ["نرم‌افزار سپیدار سیستم", "نرم‌افزار هلو حسابداری", "نرم‌افزار همکاران سیستم", "صورتحساب الکترونیکی"], color: "#FC4258" },
-  { icon: PayrollIco, title: "حقوق و دستمزد", sub: "محاسبه و مدیریت پرسنل", bullets: ["محاسبه حقوق، اضافه‌کاری و کسورات", "تنظیم لیست بیمه تامین اجتماعی", "احکام و قراردادهای کار", "مالیات حقوق و تکالیف قانونی"], color: "#E0394D" },
+  { icon: CoinIco, title: "حسابداری", sub: "از مبانی تا حرفه‌ای", bullets: ["اصول و مبانی حسابداری مالی", "ثبت اسناد و دفاتر قانونی", "تهیه صورت‌های مالی", "حسابداری پیشرفته شرکت‌ها"], color: "var(--rose-500)" },
+  { icon: TaxIco, title: "آموزش مالیاتی", sub: "تسلط بر قوانین مالیاتی", bullets: ["قانون مالیات مستقیم و ارزش‌افزوده", "تنظیم اظهارنامه‌های مالیاتی", "رویه‌های اعتراض و دفاع مالیاتی", "بهینه‌سازی قانونی مالیات"], color: "var(--rose-600)" },
+  { icon: SoftwareIco, title: "آموزش نرم‌افزار", sub: "کار با نرم‌افزارهای تخصصی", bullets: ["نرم‌افزار سپیدار سیستم", "نرم‌افزار هلو حسابداری", "نرم‌افزار همکاران سیستم", "صورتحساب الکترونیکی"], color: "var(--rose-500)" },
+  { icon: PayrollIco, title: "حقوق و دستمزد", sub: "محاسبه و مدیریت پرسنل", bullets: ["محاسبه حقوق، اضافه‌کاری و کسورات", "تنظیم لیست بیمه تامین اجتماعی", "احکام و قراردادهای کار", "مالیات حقوق و تکالیف قانونی"], color: "var(--rose-600)" },
 ];
 
 function EducationSection() {
@@ -238,7 +238,7 @@ function EducationSection() {
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 0 32px rgba(0,0,0,0.02)"; }}>
                 <div aria-hidden="true" style={{ position: "absolute", top: -32, left: -32, width: 140, height: 140, borderRadius: "50%", background: "var(--rose-50)", opacity: 0.7, pointerEvents: "none" }} />
                 <div style={{ position: "relative", display: "flex", gap: 16, alignItems: "flex-start", marginBottom: 18 }}>
-                  <div style={{ width: 52, height: 52, borderRadius: 14, background: `linear-gradient(135deg,${course.color} 0%,#B0263A 100%)`, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 8px 20px -6px rgba(252,66,88,0.40)" }}>
+                  <div style={{ width: 52, height: 52, borderRadius: 14, background: `linear-gradient(135deg,${course.color} 0%,var(--rose-700) 100%)`, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 8px 20px -6px color-mix(in srgb, var(--rose-500) 40%, transparent)" }}>
                     <Icon size={24} />
                   </div>
                   <div>
@@ -525,7 +525,7 @@ function LeadSection() {
   return (
     <section id="lead" className="section-pad" style={{ paddingTop: 48 }}>
       <div className="container-page">
-        <div style={{ position: "relative", borderRadius: 32, overflow: "hidden", background: "linear-gradient(165deg,#FC4258 0%,#E0394D 60%,#B0263A 100%)", boxShadow: "0 30px 70px -20px rgba(252,66,88,0.40)" }}>
+        <div style={{ position: "relative", borderRadius: 32, overflow: "hidden", background: "linear-gradient(165deg,var(--rose-500) 0%,var(--rose-600) 60%,var(--rose-700) 100%)", boxShadow: "0 30px 70px -20px color-mix(in srgb, var(--rose-500) 40%, transparent)" }}>
           <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: "url('/dot-pattern.svg')", backgroundRepeat: "repeat", backgroundSize: "200px 200px", opacity: 0.18, pointerEvents: "none" }} />
           <div className="lead-grid" style={{ position: "relative", display: "grid", gridTemplateColumns: "minmax(0,.85fr) minmax(0,1.15fr)", gap: 0 }}>
             {/* ── Left panel ── */}

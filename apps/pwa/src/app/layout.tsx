@@ -1,5 +1,7 @@
 import { AuthProvider } from "@/components/auth/auth.context.provider";
 import { ClarityAnalytics } from "@/components/clarity/clarity.component.analytics";
+import { ThemeColorPicker } from "@/components/theme/theme.component.color-picker";
+import { ThemeProvider } from "@/components/theme/theme.context.provider";
 import { brand } from "@/config/brand.config";
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
@@ -65,11 +67,14 @@ export default function RootLayout({
       <body
         className={`${dana.variable} font-dana text-xs lg:text-base antialiased bg-slate-50`}
       >
-        <AuthProvider>
-          {children}
-          <ToastContainer position="bottom-center" />
-          <ClarityAnalytics />
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            {children}
+            <ToastContainer position="bottom-center" />
+            <ClarityAnalytics />
+            <ThemeColorPicker />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

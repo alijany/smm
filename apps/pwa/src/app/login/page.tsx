@@ -25,7 +25,7 @@ export default function LoginPage() {
           maxWidth: 900,
           maxHeight: 900,
           background:
-            "radial-gradient(60% 60% at 60% 40%, rgba(252,66,88,0.14) 0%, rgba(252,66,88,0) 70%)",
+            "radial-gradient(60% 60% at 60% 40%, color-mix(in srgb, var(--rose-500) 14%, transparent) 0%, transparent 70%)",
           filter: "blur(40px)",
           pointerEvents: "none",
         }}
@@ -37,7 +37,7 @@ export default function LoginPage() {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "radial-gradient(rgba(252,66,88,0.15) 1.5px, transparent 1.5px)",
+            "radial-gradient(color-mix(in srgb, var(--rose-500) 15%, transparent) 1.5px, transparent 1.5px)",
           backgroundSize: "28px 28px",
           opacity: 0.5,
           pointerEvents: "none",

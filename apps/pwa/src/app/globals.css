@@ -90,10 +90,9 @@ button { font-family: inherit; }
   margin: 0;
   font-size: clamp(32px, 4.4vw, 60px);
   line-height: 1.18;
-  letter-spacing: -0.01em;
 }
-.split-h1 .setup  { font-weight: 800; color: var(--slate-700); display: block; }
-.split-h1 .accent { font-weight: 900; color: var(--rose-500);  display: block; }
+.split-h1 .setup  { font-weight: 900; color: var(--slate-700); display: block; }
+.split-h1 .accent { font-weight: 950; color: var(--rose-500);  display: block; }
 
 .split-h2 {
   margin: 0;

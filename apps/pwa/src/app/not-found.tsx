@@ -1,5 +1,6 @@
 "use client";
 
+import { AppLogo } from "@/components/theme/theme.component.logo";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -24,7 +25,7 @@ export default function NotFound() {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "radial-gradient(rgba(252,66,88,0.12) 1.5px, transparent 1.5px)",
+          backgroundImage: "radial-gradient(color-mix(in srgb, var(--rose-500) 12%, transparent) 1.5px, transparent 1.5px)",
           backgroundSize: "28px 28px",
           opacity: 0.6,
           pointerEvents: "none",
@@ -33,15 +34,7 @@ export default function NotFound() {
       <div style={{ position: "relative", zIndex: 1, maxWidth: 520 }}>
         {/* Logo mark */}
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
-          <svg width={52} height={52} viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <rect x="0.5" y="0.5" width="35" height="35" rx="10" fill="#FC4258" />
-            <rect x="0.5" y="0.5" width="35" height="35" rx="10" stroke="#E0394D" strokeOpacity="0.4" />
-            <rect x="8" y="20" width="4" height="8" rx="1" fill="#fff" opacity="0.7" />
-            <rect x="14" y="16" width="4" height="12" rx="1" fill="#fff" opacity="0.85" />
-            <rect x="20" y="11" width="4" height="17" rx="1" fill="#fff" />
-            <path d="M9 14L16 9L23 5.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M19 5L23 5.5L22.5 9.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <AppLogo size={200} />
         </div>
 
         {/* 404 */}

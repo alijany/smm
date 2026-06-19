@@ -147,7 +147,7 @@ export default async function BlogListPage() {
 
   if (posts.length === 0) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-16 text-center">
+      <div className="max-w-5xl mx-auto px-4 py-16 text-center h-96">
         <h1 className="text-3xl font-bold mb-4">مقالات</h1>
         <p className="text-slate-400 text-lg">هنوز مطلبی منتشر نشده است.</p>
       </div>

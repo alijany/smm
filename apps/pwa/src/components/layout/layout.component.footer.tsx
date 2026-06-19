@@ -1,22 +1,9 @@
 "use client";
 
+import { AppLogo } from "@/components/theme/theme.component.logo";
 import { brand } from "@/config/brand.config";
 import Link from "next/link";
 import React from "react";
-
-function MehrLogoMark({ size = 36 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <rect x="0.5" y="0.5" width="35" height="35" rx="10" fill="#FC4258" />
-      <rect x="0.5" y="0.5" width="35" height="35" rx="10" stroke="#E0394D" strokeOpacity="0.4" />
-      <rect x="8" y="20" width="4" height="8" rx="1" fill="#fff" opacity="0.7" />
-      <rect x="14" y="16" width="4" height="12" rx="1" fill="#fff" opacity="0.85" />
-      <rect x="20" y="11" width="4" height="17" rx="1" fill="#fff" />
-      <path d="M9 14L16 9L23 5.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M19 5L23 5.5L22.5 9.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 function InstagramIcon({ size = 20 }: { size?: number }) {
   return (
@@ -142,7 +129,7 @@ export const Footer: React.FC = () => {
           {/* Brand block */}
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <MehrLogoMark size={40} />
+              <AppLogo size={80} />
               <div style={{ lineHeight: 1.1 }}>
                 <div style={{ fontSize: 17, fontWeight: 800, color: "#fff" }}>{brand.nameShort}</div>
                 <div style={{ fontSize: 17, fontWeight: 900, color: "var(--rose-400)" }}>{brand.namePrimary}</div>

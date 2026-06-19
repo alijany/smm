@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth.context.provider";
 import { brand } from "@/config/brand.config";
+import { AppLogo } from "@/components/theme/theme.component.logo";
 import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
 import {
   IconArrowLeft,
@@ -14,20 +15,6 @@ import {
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { MenuItems } from "./layout.component.menu-items";
-
-function MehrLogoMark({ size = 36 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <rect x="0.5" y="0.5" width="35" height="35" rx="10" fill="#FC4258" />
-      <rect x="0.5" y="0.5" width="35" height="35" rx="10" stroke="#E0394D" strokeOpacity="0.4" />
-      <rect x="8" y="20" width="4" height="8" rx="1" fill="#fff" opacity="0.7" />
-      <rect x="14" y="16" width="4" height="12" rx="1" fill="#fff" opacity="0.85" />
-      <rect x="20" y="11" width="4" height="17" rx="1" fill="#fff" />
-      <path d="M9 14L16 9L23 5.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M19 5L23 5.5L22.5 9.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 export function Navbar({ transparent }: { transparent?: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -55,7 +42,7 @@ export function Navbar({ transparent }: { transparent?: boolean }) {
         >
           {/* Logo lockup */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <MehrLogoMark size={38} />
+            <AppLogo size={72} />
             <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
               <span style={{ fontSize: 17, fontWeight: 800, color: "var(--slate-800)" }}>
                 {brand.nameShort}
@@ -69,7 +56,7 @@ export function Navbar({ transparent }: { transparent?: boolean }) {
           {/* Desktop menu */}
           <MenuItems
             className="hidden md:flex gap-7"
-            itemClassName="text-sm font-medium text-[#4A546B] hover:text-[#FC4258] transition-colors duration-200"
+            itemClassName="text-sm font-medium text-[#4A546B] hover:text-[var(--rose-500)] transition-colors duration-200"
           />
 
           {/* Desktop actions */}
@@ -202,7 +189,7 @@ export function Navbar({ transparent }: { transparent?: boolean }) {
                     style={{ borderBottom: "1px solid var(--slate-100)" }}
                   >
                     <div className="flex items-center gap-2.5">
-                      <MehrLogoMark size={34} />
+                      <AppLogo size={34} />
                       <div style={{ lineHeight: 1.1 }}>
                         <div style={{ fontSize: 15, fontWeight: 800, color: "var(--slate-800)" }}>{brand.nameShort}</div>
                         <div style={{ fontSize: 15, fontWeight: 900, color: "var(--rose-500)" }}>{brand.namePrimary}</div>
@@ -220,7 +207,7 @@ export function Navbar({ transparent }: { transparent?: boolean }) {
                   <div className="flex-1 overflow-y-auto py-2">
                     <MenuItems
                       className="flex flex-col"
-                      itemClassName="px-5 py-3.5 text-base font-medium border-b border-[#EEF0F6] text-[#36425D] hover:text-[#FC4258] hover:bg-[#FFF1F3] transition-colors block"
+                      itemClassName="px-5 py-3.5 text-base font-medium border-b border-[#EEF0F6] text-[#36425D] hover:text-[var(--rose-500)] hover:bg-[var(--rose-50)] transition-colors block"
                       onClose={() => setMobileOpen(false)}
                     />
                   </div>
