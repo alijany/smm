@@ -11,10 +11,10 @@
 #   The server already runs shared infrastructure used by other projects:
 #     - Traefik  (traefik-public network) — reverse proxy / TLS termination
 #     - Redis    (standalone container)   — shared cache/queue
-#     - MinIO    (standalone container)   — shared object storage
+#     - RustFS   (standalone container)   — shared object storage
 #
 #   This project gets its own isolated Docker network (named after PROJECT_NAME).
-#   Redis and MinIO are connected to that network so the API can reach them
+#   Redis and RustFS are connected to that network so the API can reach them
 #   without exposing them publicly.
 #
 # FIRST DEPLOY
@@ -33,7 +33,7 @@
 #   build    Build base/api/pwa images locally and save a gzipped bundle
 #   ship     Copy bundle + config to server, set up network, start all services
 #   update   Rebuild images, ship, restart only api + pwa (db is untouched)
-#   network  (Re-)create the app network and connect redis + minio to it
+#   network  (Re-)create the app network and connect redis + rustfs to it
 #
 # OVERRIDES (skip interactive prompts)
 #   SSH_HOST=root@1.2.3.4 REMOTE_DIR=/opt/myapp ./scripts/deploy-offline.sh
@@ -51,8 +51,8 @@ set -euo pipefail
 PLATFORM="${PLATFORM:-linux/amd64}"
 
 # Shared services already running on the server that need to join the app network.
-# redis and minio are standalone containers (not managed by this compose).
-SHARED_SERVICES=(redis minio)
+# redis and rustfs are standalone containers (not managed by this compose).
+SHARED_SERVICES=(redis rustfs)
 
 # Resolve project root (one level up from scripts/) regardless of where called from.
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -153,7 +153,7 @@ build() {
 
 # ---------------------------------------------------------------------------
 # Network setup on the server
-# Creates the app network and connects shared services (redis, minio) to it.
+# Creates the app network and connects shared services (redis, rustfs) to it.
 # Safe to re-run — skips already-connected services.
 # ---------------------------------------------------------------------------
 setup_network() {
