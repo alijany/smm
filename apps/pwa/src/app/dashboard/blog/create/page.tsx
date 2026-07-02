@@ -32,7 +32,7 @@ export default function CreateBlogPostPage() {
             <div className="font-bold grow">مطلب جدید</div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white grow overflow-auto">
+          <div className="grow overflow-auto">
             <BlogPostForm onSubmit={handleSubmit} isLoading={isLoading} />
           </div>
         </div>
