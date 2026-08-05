@@ -62,7 +62,7 @@ steps:
     commands:
       - cp -r /environments/. ./
       # - docker compose build --parallel ${PROJECT_NAME}-pwa ${PROJECT_NAME}-api
-      - docker compose up -d --no-build
+      - docker compose up -d
       - docker image prune -f
     depends_on:
       - build base
@@ -123,7 +123,7 @@ volumes:
       path: /var/run/docker.sock
   - name: environments
     host:
-      path: /root/${PROJECT_NAME}-env
+      path: /root/smm-env
   - name: docker-cache
     host:
       path: /var/lib/docker/cache
