@@ -419,6 +419,10 @@ function BlogPreviewSection() {
   const { data } = useSWR<GetBlogPostsResponse>('/blog?status=published&limit=3', fetcher);
   const posts = data?.items ?? [];
 
+  if (posts.length === 0) {
+    return null;
+  }
+
   return (
     <section id="blog" className="section-pad">
       <div className="container-page">
@@ -431,43 +435,41 @@ function BlogPreviewSection() {
             <span>همه مقالات</span><ArrowLeftIco size={16} />
           </Link>
         </div>
-        {posts.length > 0 && (
-          <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
-            {posts.map((post) => (
-              <Link key={post.id} href={`/blog/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
-                <div className="design-card" style={{ padding: 0, borderRadius: 24, overflow: "hidden", height: "100%", display: "flex", flexDirection: "column", transition: "transform .2s, box-shadow .2s", cursor: "pointer" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 20px 50px -20px rgba(31,42,68,0.18)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 32px rgba(0,0,0,0.02)"; }}>
-                  <div style={{ height: 180, overflow: "hidden", background: "var(--slate-100)" }}>
-                    {post.coverImage ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img src={post.coverImage} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                    ) : (
-                      <div style={{ width: "100%", height: "100%", background: "var(--slate-100)" }} />
+        <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+          {posts.map((post) => (
+            <Link key={post.id} href={`/blog/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
+              <div className="design-card" style={{ padding: 0, borderRadius: 24, overflow: "hidden", height: "100%", display: "flex", flexDirection: "column", transition: "transform .2s, box-shadow .2s", cursor: "pointer" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 20px 50px -20px rgba(31,42,68,0.18)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 32px rgba(0,0,0,0.02)"; }}>
+                <div style={{ height: 180, overflow: "hidden", background: "var(--slate-100)" }}>
+                  {post.coverImage ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={post.coverImage} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  ) : (
+                    <div style={{ width: "100%", height: "100%", background: "var(--slate-100)" }} />
+                  )}
+                </div>
+                <div style={{ padding: "22px 24px", display: "flex", flexDirection: "column", flex: 1, gap: 12 }}>
+                  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                    {post.categories?.[0] && (
+                      <span style={{ fontSize: 11, fontWeight: 700, color: "var(--rose-600)", background: "var(--rose-50)", padding: "4px 10px", borderRadius: 9999 }}>{post.categories[0].name}</span>
+                    )}
+                    {post.publishedAt && (
+                      <span style={{ fontSize: 11, color: "var(--slate-400)" }}>{new Date(post.publishedAt).toLocaleDateString('fa-IR')}</span>
                     )}
                   </div>
-                  <div style={{ padding: "22px 24px", display: "flex", flexDirection: "column", flex: 1, gap: 12 }}>
-                    <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                      {post.categories?.[0] && (
-                        <span style={{ fontSize: 11, fontWeight: 700, color: "var(--rose-600)", background: "var(--rose-50)", padding: "4px 10px", borderRadius: 9999 }}>{post.categories[0].name}</span>
-                      )}
-                      {post.publishedAt && (
-                        <span style={{ fontSize: 11, color: "var(--slate-400)" }}>{new Date(post.publishedAt).toLocaleDateString('fa-IR')}</span>
-                      )}
-                    </div>
-                    <h3 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: "var(--slate-800)", lineHeight: 1.5 }}>{post.title}</h3>
-                    {post.excerpt && (
-                      <p style={{ margin: 0, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.75, flex: 1 }}>{post.excerpt}</p>
-                    )}
-                    <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 700, color: "var(--rose-500)", marginTop: 4 }}>
-                      <span>ادامه مطلب</span><ArrowLeftIco size={14} />
-                    </div>
+                  <h3 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: "var(--slate-800)", lineHeight: 1.5 }}>{post.title}</h3>
+                  {post.excerpt && (
+                    <p style={{ margin: 0, fontSize: 13, color: "var(--slate-600)", lineHeight: 1.75, flex: 1 }}>{post.excerpt}</p>
+                  )}
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 700, color: "var(--rose-500)", marginTop: 4 }}>
+                    <span>ادامه مطلب</span><ArrowLeftIco size={14} />
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        )}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
       <style>{`@media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr !important;}}@media(max-width:560px){.blog-grid{grid-template-columns:1fr !important;}}`}</style>
     </section>
