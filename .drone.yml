@@ -62,8 +62,8 @@ steps:
       COMPOSE_DOCKER_CLI_BUILD: 1
     commands:
       - cp -r /environments/. ./
-      - docker compose up -d --build
-      - docker image prune -f
+      - docker compose build pwa
+      - docker compose up -d
     depends_on:
       - build base
 
