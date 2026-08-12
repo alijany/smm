@@ -95,7 +95,7 @@ services:
       - traefik.http.routers.${PROJECT_NAME}-pwa.priority=1
       - traefik.http.routers.${PROJECT_NAME}-pwa.entrypoints=websecure
       - traefik.http.routers.${PROJECT_NAME}-pwa.tls.certresolver=letsencrypt
-      - traefik.http.services.${PROJECT_NAME}-pwa.loadbalancer.server.port=8000
+      - traefik.http.services.${PROJECT_NAME}-pwa.loadbalancer.server.port=4000
 
 
 volumes:
