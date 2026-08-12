@@ -62,8 +62,7 @@ steps:
       COMPOSE_DOCKER_CLI_BUILD: 1
     commands:
       - cp -r /environments/. ./
-      # - docker compose build --parallel ${PROJECT_NAME}-pwa ${PROJECT_NAME}-api
-      - docker compose up -d
+      - docker compose up -d --build
       - docker image prune -f
     depends_on:
       - build base
