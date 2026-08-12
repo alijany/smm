@@ -6,14 +6,14 @@
 :root {
   --font-sans: var(--font-dana), system-ui, sans-serif;
 
-  --rose-50:  #FFF1F3;
-  --rose-100: #FFE3E7;
-  --rose-200: #FFCAD2;
-  --rose-300: #FFA7B4;
-  --rose-400: #FF7185;
-  --rose-500: #FC4258;
-  --rose-600: #E0394D;
-  --rose-700: #B0263A;
+  --rose-50:  #F1F8F9;
+  --rose-100: #E2F2F2;
+  --rose-200: #C6E5E5;
+  --rose-300: #96CFCF;
+  --rose-400: #53B0B1;
+  --rose-500: #109193;
+  --rose-600: #0E8081;
+  --rose-700: #0B6667;
 
   --slate-50:  #F8F9FC;
   --slate-100: #EEF0F6;
@@ -197,7 +197,7 @@ details.faq-row .faq-body {
 .design-field textarea:focus {
   border-color: var(--rose-500);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(252,66,88,0.10);
+  box-shadow: 0 0 0 4px rgba(16,145,147,0.10);
 }
 .design-field textarea { resize: vertical; min-height: 96px; }
 

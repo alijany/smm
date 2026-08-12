@@ -7,6 +7,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import { GetBlogPostsResponse } from "./dashboard/blog/blog.types";
 import { CreateLeadDto } from "./dashboard/leads/leads.types";
+import { CourseRegistrationModal } from "./landing.component.course-registration-modal";
 
 /* ─── Inline icons ──────────────────────────────────── */
 function Ico({ size = 20, children, style }: { size?: number; children: React.ReactNode; style?: React.CSSProperties }) {
@@ -216,6 +217,8 @@ const educationCourses = [
 ];
 
 function EducationSection() {
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+
   return (
     <section id="education" className="section-pad" style={{ background: "linear-gradient(180deg,#fff 0%,var(--slate-50) 100%)" }}>
       <div className="container-page">
@@ -255,9 +258,9 @@ function EducationSection() {
                   ))}
                 </ul>
                 <div style={{ marginTop: 22, paddingTop: 16, borderTop: "1px solid var(--slate-100)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <a href="#lead" style={{ fontSize: 14, fontWeight: 700, color: "var(--rose-500)", display: "flex", alignItems: "center", gap: 6 }}>
+                  <button type="button" onClick={() => setSelectedCourse(course.title)} style={{ padding: 0, border: 0, background: "transparent", cursor: "pointer", fontFamily: "inherit", fontSize: 14, fontWeight: 700, color: "var(--rose-500)", display: "flex", alignItems: "center", gap: 6 }}>
                     <span>ثبت‌نام در دوره</span><ArrowLeftIco size={16} />
-                  </a>
+                  </button>
                   <span style={{ fontSize: 11, color: "var(--slate-400)" }}>حضوری / آنلاین</span>
                 </div>
               </div>
@@ -265,6 +268,7 @@ function EducationSection() {
           })}
         </div>
       </div>
+      <CourseRegistrationModal courseTitle={selectedCourse} onClose={() => setSelectedCourse(null)} />
       <style>{`@media(max-width:760px){.edu-grid{grid-template-columns:1fr !important;}}`}</style>
     </section>
   );
@@ -318,6 +322,7 @@ const teamMembers = [
   { photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&auto=format&fit=crop&crop=faces", name: "رویا نوری", role: "سرپرست بیمه و دستمزد", exp: "۱۱ سال", badge: "متخصص تامین اجتماعی", phone: "02188776688", email: "r.nouri@shakhes-mehr.ir" },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Temporarily disabled in HomePage for production.
 function TeamSection() {
   return (
     <section id="team" className="section-pad">
@@ -362,6 +367,7 @@ function TeamSection() {
 }
 
 /* ─── TRUST ─────────────────────────────────────────── */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Marquee is temporarily disabled below.
 const clients = ["آرین شیمی", "سرما تجارت", "گروه پاژ", "نگین خاوران", "آدا تجهیز", "هلدینگ ماهور", "صنایع پارس‌بان", "بازرگانی نیلوفر", "ارکیده سبز", "کیمیا فولاد"];
 const accreditations = ["سازمان امور مالیاتی کشور", "جامعه حسابداران رسمی ایران", "سازمان تامین اجتماعی", "کانون وکلای دادگستری"];
 const partners = [{ name: "همکاران سیستم", sub: "Sepidar / Hamkaran Software" }, { name: "سپیدار", sub: "نرم‌افزار حسابداری" }, { name: "ایزی اینویس", sub: "صورتحساب آسان" }, { name: "هلو  ", sub: "نرم‌افزار حسابداری" }];
@@ -374,6 +380,7 @@ function TrustSection() {
           <EyebrowPill icon={HandshakeIco}>اعتماد، در عمل</EyebrowPill>
           <h2 className="split-h2 flex flex-col justify-center items-center" style={{ marginTop: 18 }}><span className="setup">بیش از ۳۲۰ کسب‌وکار</span><span className="accent">امور مالی خود را به ما سپرده‌اند</span></h2>
         </div>
+        {/* Marquee temporarily disabled for production.
         <div className="marquee" style={{ marginBottom: 64 }}>
           <div className="marquee-track">
             {[...clients, ...clients].map((c, i) => (
@@ -381,6 +388,7 @@ function TrustSection() {
             ))}
           </div>
         </div>
+        */}
         <div className="trust-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
           <div className="design-card" style={{ padding: 32, borderRadius: 24 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
@@ -733,7 +741,7 @@ export default function HomePage() {
           <ServicesSection />
           <EducationSection />
           <WhyUsSection />
-          <TeamSection />
+          {/* <TeamSection /> */}
           <TrustSection />
           <BlogPreviewSection />
           <LeadSection />
