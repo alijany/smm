@@ -95,8 +95,8 @@ export const Footer: React.FC = () => {
     <footer
       style={{
         position: "relative",
-        background: "var(--slate-800)",
-        color: "rgba(255,255,255,0.78)",
+        background: "var(--slate-50)",
+        color: "var(--slate-600)",
         paddingTop: 72,
         paddingBottom: 32,
         overflow: "hidden",
@@ -123,7 +123,7 @@ export const Footer: React.FC = () => {
             gridTemplateColumns: "1.4fr 1fr 1fr 1.1fr",
             gap: 40,
             paddingBottom: 48,
-            borderBottom: "1px solid rgba(255,255,255,0.10)",
+            borderBottom: "1px solid var(--slate-200)",
           }}
         >
           {/* Brand block */}
@@ -131,11 +131,11 @@ export const Footer: React.FC = () => {
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <AppLogo size={80} />
               <div style={{ lineHeight: 1.1 }}>
-                <div style={{ fontSize: 17, fontWeight: 800, color: "#fff" }}>{brand.nameShort}</div>
-                <div style={{ fontSize: 17, fontWeight: 900, color: "var(--rose-400)" }}>{brand.namePrimary}</div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: "var(--slate-900)" }}>{brand.nameShort}</div>
+                <div style={{ fontSize: 17, fontWeight: 900, color: "var(--rose-600)" }}>{brand.namePrimary}</div>
               </div>
             </div>
-            <p style={{ fontSize: 14, lineHeight: 1.85, color: "rgba(255,255,255,0.65)", margin: 0 }}>
+            <p style={{ fontSize: 14, lineHeight: 1.85, color: "var(--slate-500)", margin: 0 }}>
               {brand.description}
             </p>
             <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
@@ -149,10 +149,10 @@ export const Footer: React.FC = () => {
                   href={href}
                   style={{
                     width: 38, height: 38, borderRadius: 10,
-                    background: "rgba(255,255,255,0.08)",
+                    background: "var(--slate-100)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    color: "#fff",
-                    border: "1px solid rgba(255,255,255,0.10)",
+                    color: "var(--slate-600)",
+                    border: "1px solid var(--slate-200)",
                   }}
                 >
                   <Icon size={17} />
@@ -163,13 +163,13 @@ export const Footer: React.FC = () => {
 
           {/* Services links */}
           <div>
-            <h4 style={{ fontSize: 13, fontWeight: 700, color: "#fff", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: 1 }}>
+            <h4 style={{ fontSize: 13, fontWeight: 700, color: "var(--slate-900)", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: 1 }}>
               خدمات
             </h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
               {services.map((s) => (
                 <li key={s}>
-                  <Link href="/#services" style={{ fontSize: 14, color: "rgba(255,255,255,0.70)" }}>{s}</Link>
+                  <Link href="/#services" style={{ fontSize: 14, color: "var(--slate-500)" }}>{s}</Link>
                 </li>
               ))}
             </ul>
@@ -177,13 +177,13 @@ export const Footer: React.FC = () => {
 
           {/* Institute links */}
           <div>
-            <h4 style={{ fontSize: 13, fontWeight: 700, color: "#fff", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: 1 }}>
+            <h4 style={{ fontSize: 13, fontWeight: 700, color: "var(--slate-900)", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: 1 }}>
               موسسه
             </h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
               {instituteLinks.map(([label, href]) => (
                 <li key={label}>
-                  <Link href={href} style={{ fontSize: 14, color: "rgba(255,255,255,0.70)" }}>{label}</Link>
+                  <Link href={href} style={{ fontSize: 14, color: "var(--slate-500)" }}>{label}</Link>
                 </li>
               ))}
             </ul>
@@ -191,17 +191,13 @@ export const Footer: React.FC = () => {
 
           {/* Contact */}
           <div id="contact">
-            <h4 style={{ fontSize: 13, fontWeight: 700, color: "#fff", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: 1 }}>
+            <h4 style={{ fontSize: 13, fontWeight: 700, color: "var(--slate-900)", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: 1 }}>
               تماس مستقیم
             </h4>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14, fontSize: 14, color: "rgba(255,255,255,0.78)" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14, fontSize: 14, color: "var(--slate-600)" }}>
               <a href={`tel:${brand.contact.phone.primary}`} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 <PhoneIcon size={16} />
                 <span dir="ltr">{brand.contact.phone.display}</span>
-              </a>
-              <a href={`mailto:${brand.contact.email}`} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <MailIcon size={16} />
-                <span dir="ltr">{brand.contact.email}</span>
               </a>
               <div style={{ display: "flex", alignItems: "flex-start", gap: 10, lineHeight: 1.65 }}>
                 <LocationIcon size={16} />
@@ -227,24 +223,8 @@ export const Footer: React.FC = () => {
             gap: 20,
           }}
         >
-          <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)" }}>
+          <div style={{ fontSize: 13, color: "var(--slate-400)" }}>
             {brand.copyright}
-          </div>
-          <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-            <div
-              style={{
-                padding: "10px 14px",
-                background: "rgba(255,255,255,0.06)",
-                borderRadius: 10,
-                border: "1px solid rgba(255,255,255,0.10)",
-                fontSize: 11,
-                color: "rgba(255,255,255,0.65)",
-                display: "flex", alignItems: "center", gap: 8,
-              }}
-            >
-              <ShieldCheckIcon size={16} />
-              <span>شناسه ملی: {brand.nationalId}</span>
-            </div>
           </div>
         </div>
       </div>
